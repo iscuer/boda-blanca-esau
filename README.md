@@ -8,7 +8,7 @@ Ejecuta `npm ci` y `npm run dev`. La página principal incluye el formulario de 
 
 1. Crea una hoja privada en Google Sheets y copia su ID desde la URL.
 2. En Extensiones → Apps Script, pega `google-apps-script/Code.gs`.
-3. En las propiedades del script, configura `SPREADSHEET_ID` y un `WEB_APP_SECRET` aleatorio y largo.
+3. En las propiedades del script, configura `SPREADSHEET_ID` y un `GOOGLE_SHEETS_SECRET` aleatorio y largo.
 4. Implementa el script como aplicación web, ejecútalo como propietario y permite que el servidor lo llame sin iniciar sesión. El script exige el secreto y la hoja permanece privada.
 5. Copia `.env.example` a `.env.local`. Configura la URL de Apps Script terminada en `/exec`, el mismo secreto y la contraseña de la zona privada. Usa esas variables también en el alojamiento.
 6. Comprueba un envío en la pestaña Confirmaciones, entra en `/novios` y abre el Excel descargado.

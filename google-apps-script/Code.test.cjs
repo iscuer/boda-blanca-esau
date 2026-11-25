@@ -15,7 +15,7 @@ function setup() {
   let released = false;
   const context = vm.createContext({
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: text => ({ setMimeType: () => JSON.parse(text) }) },
-    PropertiesService: { getScriptProperties: () => ({ getProperty: key => key === 'WEB_APP_SECRET' ? 'test-secret' : 'sheet' }) },
+    PropertiesService: { getScriptProperties: () => ({ getProperty: key => key === 'GOOGLE_SHEETS_SECRET' ? 'test-secret' : 'sheet' }) },
     LockService: { getScriptLock: () => ({ waitLock() {}, hasLock: () => true, releaseLock: () => { released = true; } }) },
     SpreadsheetApp: { openById: () => ({ getSheetByName: () => sheet }), flush() {} },
   });

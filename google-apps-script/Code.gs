@@ -1,4 +1,4 @@
-// Propiedades del script necesarias: SPREADSHEET_ID y WEB_APP_SECRET.
+// Propiedades del script necesarias: SPREADSHEET_ID y GOOGLE_SHEETS_SECRET.
 // No publiques la hoja: solo se accede desde el servidor con el secreto.
 function doPost(e) {
   const json = value => ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);
@@ -6,7 +6,7 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     const properties = PropertiesService.getScriptProperties();
-    const secret = properties.getProperty('WEB_APP_SECRET');
+    const secret = properties.getProperty('GOOGLE_SHEETS_SECRET');
     if (!secret || data.secret !== secret) return json({ok: false, error: 'Secreto incorrecto.'});
     if (!['append', 'read', 'update'].includes(data.action)) return json({ok: false, error: 'Acción no disponible. Publica una nueva versión de Apps Script.'});
     if (data.action === 'append' && (!Array.isArray(data.rows) || data.rows.length < 1 || data.rows.length > 2)) return json({ok: false, error: 'Filas no válidas.'});
