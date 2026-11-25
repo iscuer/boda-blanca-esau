@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Boda · Abrir servidor local",
+      "type": "shell",
+      "command": "npm",
+      "windows": {
+        "command": "npm.cmd"
+      },
+      "args": ["run", "dev", "--", "--webpack", "--hostname", "127.0.0.1", "--port", "3015"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
