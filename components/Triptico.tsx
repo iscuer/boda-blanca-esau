@@ -26,6 +26,8 @@ export default function Triptico({
   const [activo, setActivo] = useState<Apartado | null>(null);
   const abrir = useRef<HTMLAnchorElement>(null);
   const anterior = useRef<Apartado | null>(null);
+  const ventana = useRef<HTMLDivElement>(null);
+  const hojaCentral = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function leerApartado() {
@@ -39,8 +41,17 @@ export default function Triptico({
   }, []);
 
   useEffect(() => {
-    if (activo) document.getElementById(activo)?.focus({ preventScroll: true });
-    else if (anterior.current) abrir.current?.focus();
+    if (activo) {
+      document.getElementById(activo)?.focus({ preventScroll: true });
+      const vista = ventana.current;
+      const centro = hojaCentral.current;
+      if (vista && centro && vista.scrollWidth > vista.clientWidth) {
+        const distancia = centro.getBoundingClientRect().left - vista.getBoundingClientRect().left;
+        vista.scrollLeft += distancia - (vista.clientWidth - centro.clientWidth) / 2;
+      }
+    } else if (anterior.current) {
+      abrir.current?.focus();
+    }
     anterior.current = activo;
   }, [activo]);
 
@@ -57,35 +68,38 @@ export default function Triptico({
           <h1>Esaú <span>y</span> Blanca</h1>
           <a href="#inicio">Cerrar invitación</a>
         </div>
-        <div className="invitacion-paneles">
-          {izquierda}
-          <div className="triptico-centro">
-            <section id="menu" tabIndex={-1} className="triptico-menu" hidden={activo !== "menu"}>
-              <h2>Esaú <span>y</span> Blanca</h2>
-              <time dateTime={fechaBoda.iso}>{fechaBoda.fecha} · {fechaBoda.hora}</time>
-              <nav className="invitacion-indice" aria-label="Apartados de la invitación">
-                {apartados.map(({ id, nombre }) => (
-                  <a className="invitacion-tarjeta" key={id} href={`#${id}`}>
-                    <span className="invitacion-tarjeta-foto" aria-hidden="true">
-                      <Image
-                        src={boda.fotosMenu[id].src}
-                        alt=""
-                        fill
-                        sizes="(max-width: 48rem) 30vw, 11rem"
-                        style={{ objectPosition: boda.fotosMenu[id].encuadre }}
-                      />
-                    </span>
-                    <span className="invitacion-tarjeta-titulo">{nombre}</span>
-                  </a>
-                ))}
-              </nav>
-            </section>
-            <div className="triptico-detalle" hidden={!activo || activo === "menu"}>
-              <a className="triptico-volver" href="#menu">Volver al menú</a>
-              <div className="triptico-contenido">{children}</div>
+        <p className="triptico-pista">Desliza hacia los lados para ver las solapas</p>
+        <div className="triptico-ventana" ref={ventana}>
+          <div className="invitacion-paneles">
+            {izquierda}
+            <div className="triptico-centro" ref={hojaCentral}>
+              <section id="menu" tabIndex={-1} className="triptico-menu" hidden={activo !== "menu"}>
+                <h2>Esaú <span>y</span> Blanca</h2>
+                <time dateTime={fechaBoda.iso}>{fechaBoda.fecha} · {fechaBoda.hora}</time>
+                <nav className="invitacion-indice" aria-label="Apartados de la invitación">
+                  {apartados.map(({ id, nombre }) => (
+                    <a className="invitacion-tarjeta" key={id} href={`#${id}`}>
+                      <span className="invitacion-tarjeta-foto" aria-hidden="true">
+                        <Image
+                          src={boda.fotosMenu[id].src}
+                          alt=""
+                          fill
+                          sizes="(max-width: 48rem) 30vw, 11rem"
+                          style={{ objectPosition: boda.fotosMenu[id].encuadre }}
+                        />
+                      </span>
+                      <span className="invitacion-tarjeta-titulo">{nombre}</span>
+                    </a>
+                  ))}
+                </nav>
+              </section>
+              <div className="triptico-detalle" hidden={!activo || activo === "menu"}>
+                <a className="triptico-volver" href="#menu">Volver al menú</a>
+                <div className="triptico-contenido">{children}</div>
+              </div>
             </div>
+            {derecha}
           </div>
-          {derecha}
         </div>
       </div>
     </div>

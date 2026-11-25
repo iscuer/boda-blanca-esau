@@ -208,18 +208,16 @@ main#inicio {
   z-index: 1;
 }
 
-@media (min-width: 48.01rem) {
-  .invitacion-historia::before {
-    right: -.38rem;
-  }
+.invitacion-historia::before {
+  right: -.38rem;
+}
 
-  .triptico-centro::before {
-    inset-inline: -.38rem;
-  }
+.triptico-centro::before {
+  inset-inline: -.38rem;
+}
 
-  .invitacion-asistencia::before {
-    left: -.38rem;
-  }
+.invitacion-asistencia::before {
+  left: -.38rem;
 }
 
 .triptico-menu {
@@ -401,14 +399,46 @@ section[id] {
   scroll-margin-top: 1rem;
 }
 
+.triptico-pista {
+  display: none;
+}
+
 @media (max-width: 48rem) {
-  .invitacion-paneles {
-    grid-template-columns: 1fr;
-    gap: .6rem;
+  .triptico-pista {
+    display: block;
+    margin: .45rem 0;
+    color: var(--azul);
+    font-size: .88rem;
   }
 
-  .triptico-centro {
-    order: -1;
+  .triptico-ventana {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .invitacion-paneles {
+    grid-template-columns: max(12rem, 64%) 78% max(12rem, 64%);
+    margin-top: 0;
+  }
+
+  .invitacion-paneles > * {
+    scroll-snap-align: center;
+  }
+
+  .invitacion-paneles > :first-child {
+    scroll-snap-align: start;
+  }
+
+  .invitacion-paneles > :last-child {
+    scroll-snap-align: end;
+  }
+}
+
+@media (max-width: 390px) {
+  .invitacion-indice {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -421,14 +451,6 @@ section[id] {
     transform: rotateX(96deg);
   }
 
-  .invitacion-panel {
-    --bisagra: center top;
-    transform: rotateX(-80deg);
-  }
-
-  .invitacion[data-abierta="true"] .invitacion-panel {
-    transform: rotateX(0);
-  }
 }
 
 .boda-section {
