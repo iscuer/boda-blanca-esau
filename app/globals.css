@@ -117,32 +117,25 @@ main#inicio {
 
 .invitacion-indice {
   display: grid;
+  flex: 1;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: .85rem 0 0;
-  border-block: 1px solid #cdbb9e;
+  grid-auto-rows: 1fr;
+  gap: clamp(.35rem, 1vw, .7rem);
+  margin-top: clamp(.75rem, 2vw, 1.35rem);
 }
 
 .invitacion-tarjeta {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  justify-content: center;
-  padding: .55rem clamp(.15rem, 1vw, .65rem);
   color: var(--azul);
-}
-
-.invitacion-tarjeta:nth-child(-n + 3) {
-  border-bottom: 1px solid #cdbb9e;
-}
-
-.invitacion-tarjeta:not(:nth-child(3n)) {
-  border-right: 1px solid #cdbb9e;
 }
 
 .invitacion-tarjeta-foto {
   display: block;
+  flex: 1 0 auto;
   position: relative;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 1;
 }
 
 .invitacion-tarjeta-foto img {
@@ -188,8 +181,14 @@ main#inicio {
 }
 
 .triptico-menu {
-  padding: clamp(1.1rem, 3vw, 2.5rem) clamp(.65rem, 2.6vw, 2rem);
+  padding: clamp(.9rem, 2.6vw, 1.65rem) clamp(.4rem, 1.3vw, .9rem) .5rem;
   scroll-margin-top: 1rem;
+}
+
+.triptico-menu:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .triptico-menu h2 {

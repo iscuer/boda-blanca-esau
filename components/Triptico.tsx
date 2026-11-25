@@ -63,7 +63,6 @@ export default function Triptico({
             <section id="menu" tabIndex={-1} className="triptico-menu" hidden={activo !== "menu"}>
               <h2>Esaú <span>y</span> Blanca</h2>
               <time dateTime={fechaBoda.iso}>{fechaBoda.fecha} · {fechaBoda.hora}</time>
-              <div className="invitacion-adorno" aria-hidden="true">✦</div>
               <nav className="invitacion-indice" aria-label="Apartados de la invitación">
                 {apartados.map(({ id, nombre }) => (
                   <a className="invitacion-tarjeta" key={id} href={`#${id}`}>
@@ -72,7 +71,7 @@ export default function Triptico({
                         src={boda.fotosMenu[id].src}
                         alt=""
                         fill
-                        sizes="(max-width: 48rem) 26vw, 9rem"
+                        sizes="(max-width: 48rem) 30vw, 11rem"
                         style={{ objectPosition: boda.fotosMenu[id].encuadre }}
                       />
                     </span>
