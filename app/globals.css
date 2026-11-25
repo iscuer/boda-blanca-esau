@@ -331,6 +331,10 @@ main#inicio {
 
 .invitacion-panel {
   position: relative;
+  background-image: url("/invitacion/greca-borde.webp");
+  background-repeat: repeat-y;
+  background-size: clamp(.58rem, 1.45vw, 1.1rem) auto;
+  background-blend-mode: multiply;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,6 +343,14 @@ main#inicio {
   padding: clamp(1.4rem, 3.3vw, 2.65rem) clamp(1.05rem, 3vw, 2.3rem);
   border: .38rem double var(--azul);
   color: var(--azul);
+}
+
+.invitacion-historia {
+  background-position: left .12rem top;
+}
+
+.invitacion-asistencia {
+  background-position: right .12rem top;
 }
 
 .invitacion-panel h2 {
