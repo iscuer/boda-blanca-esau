@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { boda } from "@/app/boda";
+import { boda, fechaBoda } from "@/app/boda";
 
 const apartados = [
   { id: "enlace", nombre: "El enlace" },
@@ -60,22 +60,27 @@ export default function Triptico({
         <div className="invitacion-paneles">
           {izquierda}
           <div className="triptico-centro">
-            <nav id="menu" tabIndex={-1} className="invitacion-indice" aria-label="Apartados de la invitación">
-              {apartados.map(({ id, nombre }) => (
-                <a className="invitacion-tarjeta" key={id} href={`#${id}`} aria-current={activo === id ? "location" : undefined}>
-                  <span className="invitacion-tarjeta-foto" aria-hidden="true">
+            <section id="menu" tabIndex={-1} className="triptico-menu" hidden={activo !== "menu"}>
+              <h2>Esaú <span>y</span> Blanca</h2>
+              <time dateTime={fechaBoda.iso}>{fechaBoda.fecha} · {fechaBoda.hora}</time>
+              <div className="invitacion-adorno" aria-hidden="true">✦</div>
+              <nav className="invitacion-indice" aria-label="Apartados de la invitación">
+                {apartados.map(({ id, nombre }) => (
+                  <a className="invitacion-tarjeta" key={id} href={`#${id}`}>
                     {boda.fotosMenu[id] && (
-                      <Image src={boda.fotosMenu[id]} alt="" fill sizes="(max-width: 48rem) 28vw, 10rem" />
+                      <span className="invitacion-tarjeta-foto" aria-hidden="true">
+                        <Image src={boda.fotosMenu[id]} alt="" fill sizes="(max-width: 48rem) 26vw, 9rem" />
+                      </span>
                     )}
-                  </span>
-                  <span className="invitacion-tarjeta-titulo">{nombre}</span>
-                </a>
-              ))}
-            </nav>
-            {children}
-            {activo && activo !== "menu" && (
+                    <span className="invitacion-tarjeta-titulo">{nombre}</span>
+                  </a>
+                ))}
+              </nav>
+            </section>
+            <div className="triptico-detalle" hidden={!activo || activo === "menu"}>
               <a className="triptico-volver" href="#menu">Volver al menú</a>
-            )}
+              <div className="triptico-contenido">{children}</div>
+            </div>
           </div>
           {derecha}
         </div>
