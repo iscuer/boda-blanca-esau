@@ -8,6 +8,14 @@ export const fechaBoda = {
 };
 
 export const boda = {
+  fotosMenu: {
+    enlace: "",
+    mensajes: "",
+    fotos: "",
+    hoteles: "",
+    regalo: "",
+    confirmacion: "",
+  },
   hoteles: [] as Hotel[],
   regalo: { texto: "", enlace: "" },
   mensajes: [
