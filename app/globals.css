@@ -47,6 +47,31 @@ body {
   mix-blend-mode: multiply;
 }
 
+.triptico-abrir {
+  margin: .4rem auto 1rem;
+}
+
+.triptico-barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .45rem 1rem;
+  padding: .75rem 1rem;
+  background: var(--papel);
+  color: var(--dorado);
+}
+
+.triptico-barra h1 {
+  font: italic clamp(1.65rem, 4vw, 2.7rem) Georgia, serif;
+}
+
+.triptico-barra a {
+  padding-block: .4rem;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
 .invitacion-adorno {
   display: flex;
   align-items: center;
@@ -88,9 +113,76 @@ body {
 
 .invitacion-paneles {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .6rem;
-  margin-top: .85rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
+  margin-top: .65rem;
+  perspective: 110rem;
+}
+
+.triptico-centro {
+  min-width: 0;
+  background: var(--papel);
+  border: .38rem double var(--azul);
+  box-shadow: 0 .4rem 1.25rem #3f2a171c;
+  color: var(--azul);
+}
+
+.triptico-centro > section:not(:target) {
+  display: none;
+}
+
+.triptico-centro > .boda-section {
+  width: 100%;
+  padding: clamp(1.1rem, 4vw, 2.4rem);
+  border-bottom: 0;
+}
+
+.triptico-centro .invitacion-enlace {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.triptico-centro .invitacion-enlace h2 {
+  margin: 0;
+}
+
+.triptico-centro .invitacion-enlace time strong,
+.triptico-centro .invitacion-enlace time span {
+  display: block;
+}
+
+.triptico-centro .triptico-confirmacion form {
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+.invitacion-indice a[aria-current] {
+  text-decoration: underline;
+  text-underline-offset: .24em;
+  text-decoration-thickness: 2px;
+}
+
+@keyframes abrir-solapa {
+  from { transform: rotateY(var(--giro)); }
+  to { transform: rotateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 48.01rem) {
+  .invitacion-historia,
+  .invitacion-asistencia {
+    animation: abrir-solapa 750ms cubic-bezier(.18, .76, .25, 1) both;
+    backface-visibility: hidden;
+  }
+
+  .invitacion-historia {
+    --giro: 88deg;
+    transform-origin: right;
+  }
+
+  .invitacion-asistencia {
+    --giro: -88deg;
+    transform-origin: left;
+  }
 }
 
 .invitacion-panel {
@@ -172,10 +264,23 @@ section[id] {
 @media (max-width: 48rem) {
   .invitacion-paneles {
     grid-template-columns: 1fr;
+    gap: .6rem;
   }
 
-  .invitacion-enlace {
+  .triptico-centro {
     order: -1;
+  }
+}
+
+@keyframes abrir-solapa-movil {
+  from { transform: rotateX(-80deg); opacity: .25; }
+  to { transform: rotateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 48rem) {
+  .invitacion-panel {
+    animation: abrir-solapa-movil 620ms ease-out both;
+    transform-origin: top;
   }
 }
 
