@@ -1,60 +1,182 @@
 @import "tailwindcss";
 
 body {
-  background: #f8f5ed;
-  color: #27342b;
+  background: #eee9df;
+  color: #183760;
   font-family: Arial, sans-serif;
 }
 
-.invite {
-  min-height: 65svh;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 1.25rem;
-  padding: 4rem 1.5rem;
+.invitacion {
+  --papel: #fcf8ef;
+  --azul: #173f79;
+  --dorado: #865b16;
+  width: min(72rem, calc(100% - 2rem));
+  margin: clamp(1rem, 4vw, 3rem) auto 0;
   text-align: center;
-  color: #f8f5ed;
-  background: radial-gradient(ellipse at 50% 0%, #3c5946, #21382d 75%);
 }
 
-.invite p {
-  letter-spacing: .18em;
-  text-transform: uppercase;
+.invitacion-portada,
+.invitacion-panel {
+  background: var(--papel);
+  box-shadow: 0 .4rem 1.25rem #3f2a171c;
 }
 
-.invite h1 {
-  font: normal clamp(4rem, 13vw, 10rem)/1 Georgia, serif;
+.invitacion-portada {
+  color: var(--dorado);
+  padding: clamp(1.5rem, 5vw, 4rem) clamp(.35rem, 2vw, 1.25rem) .75rem;
 }
 
-.invite a {
-  border: 1px solid currentColor;
-  padding: .9rem 1.3rem;
-  margin-top: 1rem;
+.invitacion-lema {
+  font: italic clamp(3rem, 8.5vw, 7rem)/.98 Georgia, serif;
 }
 
-.invite a:hover {
-  background: #f8f5ed;
-  color: #21382d;
+.invitacion-portada h1 {
+  font: normal clamp(1.3rem, 3.5vw, 2.8rem)/1.25 Georgia, serif;
+  text-wrap: balance;
+  margin: 0 .6rem;
 }
 
-.boda-nav {
+.invitacion-portada h1 span {
+  font-style: italic;
+}
+
+.invitacion-portada img {
+  width: 100%;
+  height: auto;
+  margin-top: .75rem;
+  mix-blend-mode: multiply;
+}
+
+.invitacion-adorno {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: .5rem;
+  color: var(--dorado);
+  margin: .65rem auto;
+}
+
+.invitacion-adorno::before,
+.invitacion-adorno::after {
+  content: "";
+  width: clamp(2rem, 11vw, 8rem);
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+
+.invitacion-indice {
+  display: flex;
   flex-wrap: wrap;
-  gap: .25rem 1.5rem;
-  padding: .6rem 1rem;
-  border-bottom: 1px solid #d6d1c2;
+  justify-content: center;
+  gap: .2rem clamp(.6rem, 3vw, 2rem);
+  padding: .65rem .5rem;
+  margin-top: 1rem;
+  background: var(--azul);
+  color: white;
 }
 
-.boda-nav a {
-  padding: .45rem 0;
+.invitacion-indice a {
+  padding: .5rem .25rem;
 }
 
-.boda-nav a:hover,
-.boda-section a {
+.invitacion-indice a:hover,
+.invitacion-enlaces a {
   text-decoration: underline;
-  text-underline-offset: .25em;
+  text-underline-offset: .24em;
+}
+
+.invitacion-paneles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .6rem;
+  margin-top: .85rem;
+}
+
+.invitacion-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .9rem;
+  min-width: 0;
+  padding: clamp(1.4rem, 3.3vw, 2.65rem) clamp(1.05rem, 3vw, 2.3rem);
+  border: .38rem double var(--azul);
+  color: var(--azul);
+}
+
+.invitacion-panel h2 {
+  font: italic clamp(2rem, 3.4vw, 3.1rem)/1.05 Georgia, serif;
+  text-wrap: balance;
+}
+
+.invitacion-panel p,
+.invitacion-panel time {
+  font: normal 1.12rem/1.4 Georgia, serif;
+}
+
+.invitacion-panel time strong,
+.invitacion-panel time span {
+  display: block;
+}
+
+.invitacion-historia img {
+  width: min(100%, 15rem);
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.invitacion-asistencia {
+  justify-content: center;
+  border-color: var(--dorado);
+  color: var(--dorado);
+}
+
+.invitacion-enlaces {
+  display: grid;
+  gap: .25rem;
+  padding-top: .35rem;
+  margin-top: auto;
+}
+
+.invitacion-enlaces a {
+  padding: .35rem 0;
+}
+
+.invitacion-asistencia .invitacion-enlaces {
+  margin-top: 0;
+}
+
+.invitacion-boton {
+  display: inline-block;
+  padding: .75rem 1rem;
+  border: 2px solid #bc8935;
+  border-radius: 2rem;
+  background: var(--azul);
+  color: white;
+  font-weight: 600;
+}
+
+.invitacion-boton:hover {
+  background: #0f2a50;
+}
+
+.invitacion a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: 1rem;
+}
+
+@media (max-width: 48rem) {
+  .invitacion-paneles {
+    grid-template-columns: 1fr;
+  }
+
+  .invitacion-enlace {
+    order: -1;
+  }
 }
 
 .boda-section {

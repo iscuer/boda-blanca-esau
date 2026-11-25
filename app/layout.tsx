@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { fechaBoda } from "./boda";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blanca y Esaú | 19 de junio de 2026",
+  title: `Blanca y Esaú | ${fechaBoda.fecha}`,
   description: "Invitación a la boda de Blanca y Esaú.",
 };
 
