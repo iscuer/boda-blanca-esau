@@ -180,46 +180,23 @@ main#inicio {
   color: var(--azul);
 }
 
-.invitacion-panel::before,
-.invitacion-panel::after {
-  position: absolute;
-  content: "";
-  width: clamp(2.25rem, 7vw, 5.4rem);
-  aspect-ratio: 1.1;
-  pointer-events: none;
-  background: url("/invitacion/greca-talavera.webp") top left / 100% auto no-repeat;
-  mix-blend-mode: multiply;
-  mask-image: linear-gradient(135deg, #000 30%, transparent 68%);
-}
-
 .invitacion-panel::before {
-  top: .12rem;
+  position: absolute;
+  inset: .12rem;
+  content: "";
+  pointer-events: none;
+  border: solid transparent;
+  border-width: var(--ancho-greca) var(--greca-derecha, 0px) var(--ancho-greca) var(--greca-izquierda, 0px);
+  border-image: url("/invitacion/greca-marco.webp") 40 round;
+  mix-blend-mode: multiply;
 }
 
-.invitacion-panel::after {
-  bottom: .12rem;
+.invitacion-historia {
+  --greca-izquierda: var(--ancho-greca);
 }
 
-.invitacion-historia::before,
-.invitacion-historia::after {
-  left: .12rem;
-}
-
-.invitacion-asistencia::before,
-.invitacion-asistencia::after {
-  right: .12rem;
-}
-
-.invitacion-historia::after {
-  transform: scaleY(-1);
-}
-
-.invitacion-asistencia::before {
-  transform: scaleX(-1);
-}
-
-.invitacion-asistencia::after {
-  transform: rotate(180deg);
+.invitacion-asistencia {
+  --greca-derecha: var(--ancho-greca);
 }
 
 .invitacion-panel > * {
@@ -330,11 +307,8 @@ main#inicio {
 }
 
 .invitacion-panel {
+  --ancho-greca: clamp(.58rem, 1.4vw, 1.1rem);
   position: relative;
-  background-image: url("/invitacion/greca-borde.webp");
-  background-repeat: repeat-y;
-  background-size: clamp(.58rem, 1.45vw, 1.1rem) auto;
-  background-blend-mode: multiply;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -343,14 +317,6 @@ main#inicio {
   padding: clamp(1.4rem, 3.3vw, 2.65rem) clamp(1.05rem, 3vw, 2.3rem);
   border: .38rem double var(--azul);
   color: var(--azul);
-}
-
-.invitacion-historia {
-  background-position: left .12rem top;
-}
-
-.invitacion-asistencia {
-  background-position: right .12rem top;
 }
 
 .invitacion-panel h2 {
