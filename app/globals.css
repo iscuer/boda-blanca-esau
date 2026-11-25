@@ -173,11 +173,45 @@ main#inicio {
 }
 
 .triptico-centro {
+  position: relative;
   min-width: 0;
   background: var(--papel);
   border: .38rem double var(--azul);
   box-shadow: 0 .4rem 1.25rem #3f2a171c;
   color: var(--azul);
+}
+
+.triptico-centro::before,
+.triptico-centro::after,
+.invitacion-panel::before,
+.invitacion-panel::after {
+  position: absolute;
+  content: "";
+  width: clamp(2.25rem, 7vw, 5.4rem);
+  aspect-ratio: 1.1;
+  pointer-events: none;
+  background: url("/invitacion/greca-talavera.webp") top left / 100% auto no-repeat;
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(135deg, #000 30%, transparent 68%);
+}
+
+.triptico-centro::before,
+.invitacion-panel::before {
+  top: .12rem;
+  left: .12rem;
+}
+
+.triptico-centro::after,
+.invitacion-panel::after {
+  right: .12rem;
+  bottom: .12rem;
+  transform: rotate(180deg);
+}
+
+.triptico-centro > *,
+.invitacion-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .triptico-menu {
@@ -283,6 +317,7 @@ main#inicio {
 }
 
 .invitacion-panel {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
