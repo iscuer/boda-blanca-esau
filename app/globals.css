@@ -166,6 +166,7 @@ main#inicio {
 }
 
 .invitacion-paneles {
+  --ancho-greca: clamp(.58rem, 1.4vw, 1.1rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr) minmax(0, 1fr);
   margin-top: .65rem;
@@ -173,6 +174,7 @@ main#inicio {
 }
 
 .triptico-centro {
+  position: relative;
   min-width: 0;
   background: var(--papel);
   border: .38rem double var(--azul);
@@ -180,7 +182,8 @@ main#inicio {
   color: var(--azul);
 }
 
-.invitacion-panel::before {
+.invitacion-panel::before,
+.triptico-centro::before {
   position: absolute;
   inset: .12rem;
   content: "";
@@ -199,13 +202,28 @@ main#inicio {
   --greca-derecha: var(--ancho-greca);
 }
 
-.invitacion-panel > * {
+.invitacion-panel > *,
+.triptico-centro > * {
   position: relative;
   z-index: 1;
 }
 
+@media (min-width: 48.01rem) {
+  .invitacion-historia::before {
+    right: -.38rem;
+  }
+
+  .triptico-centro::before {
+    inset-inline: -.38rem;
+  }
+
+  .invitacion-asistencia::before {
+    left: -.38rem;
+  }
+}
+
 .triptico-menu {
-  padding: clamp(.9rem, 2.6vw, 1.65rem) clamp(.4rem, 1.3vw, .9rem) .5rem;
+  padding: clamp(1.1rem, 2.6vw, 1.65rem) clamp(.4rem, 1.3vw, .9rem) calc(var(--ancho-greca) + .45rem);
   scroll-margin-top: 1rem;
 }
 
@@ -307,7 +325,6 @@ main#inicio {
 }
 
 .invitacion-panel {
-  --ancho-greca: clamp(.58rem, 1.4vw, 1.1rem);
   position: relative;
   display: flex;
   flex-direction: column;
