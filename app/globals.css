@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+body {
+  background: #f8f5ed;
+  color: #27342b;
+  font-family: Arial, sans-serif;
+}
+
+.invite {
+  min-height: 65svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.25rem;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  color: #f8f5ed;
+  background: radial-gradient(ellipse at 50% 0%, #3c5946, #21382d 75%);
+}
+
+.invite p {
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.invite h1 {
+  font: normal clamp(4rem, 13vw, 10rem)/1 Georgia, serif;
+}
+
+.invite a {
+  border: 1px solid currentColor;
+  padding: .9rem 1.3rem;
+  margin-top: 1rem;
+}
+
+.invite a:hover {
+  background: #f8f5ed;
+  color: #21382d;
+}
+
+.boda-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .25rem 1.5rem;
+  padding: .6rem 1rem;
+  border-bottom: 1px solid #d6d1c2;
+}
+
+.boda-nav a {
+  padding: .45rem 0;
+}
+
+.boda-nav a:hover,
+.boda-section a {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.boda-section {
+  width: min(68rem, calc(100% - 2.5rem));
+  margin: auto;
+  padding: clamp(3rem, 7vw, 6rem) 0;
+  border-bottom: 1px solid #d6d1c2;
+}
+
+.boda-section h2 {
+  font: normal clamp(2.5rem, 6vw, 4.25rem)/1.08 Georgia, serif;
+  margin-bottom: 1.35rem;
+}
+
+.boda-section p {
+  max-width: 60ch;
+  white-space: pre-line;
+}
+
+.mensajes-grid,
+.fotos-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.mensajes-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 2rem;
+}
+
+.mensajes-grid article {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid #d6d1c2;
+}
+
+.mensajes-grid h3 {
+  font: normal 2rem Georgia, serif;
+  margin-bottom: .6rem;
+}
+
+.fotos-grid {
+  grid-template-columns: 1.35fr 1fr 1fr;
+}
+
+.foto {
+  min-height: 16rem;
+  display: grid;
+  position: relative;
+  place-items: center;
+  margin: 0;
+  border: 1px solid #bcc7b2;
+  background: #e2e8da;
+  color: #35483b;
+}
+
+.foto img {
+  object-fit: cover;
+}
+
+.hoteles-lista li {
+  border-top: 1px solid #d6d1c2;
+  padding: 1rem 0;
+}
+
+.regalo {
+  padding-inline: clamp(1.25rem, 6vw, 5rem);
+  background: #e2e8da;
+}
+
+.regalo a {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .mensajes-grid,
+  .fotos-grid {
+    grid-template-columns: 1fr;
+  }
+}
