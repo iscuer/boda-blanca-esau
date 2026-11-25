@@ -173,7 +173,6 @@ main#inicio {
 }
 
 .triptico-centro {
-  position: relative;
   min-width: 0;
   background: var(--papel);
   border: .38rem double var(--azul);
@@ -181,8 +180,6 @@ main#inicio {
   color: var(--azul);
 }
 
-.triptico-centro::before,
-.triptico-centro::after,
 .invitacion-panel::before,
 .invitacion-panel::after {
   position: absolute;
@@ -195,20 +192,36 @@ main#inicio {
   mask-image: linear-gradient(135deg, #000 30%, transparent 68%);
 }
 
-.triptico-centro::before,
 .invitacion-panel::before {
   top: .12rem;
+}
+
+.invitacion-panel::after {
+  bottom: .12rem;
+}
+
+.invitacion-historia::before,
+.invitacion-historia::after {
   left: .12rem;
 }
 
-.triptico-centro::after,
-.invitacion-panel::after {
+.invitacion-asistencia::before,
+.invitacion-asistencia::after {
   right: .12rem;
-  bottom: .12rem;
+}
+
+.invitacion-historia::after {
+  transform: scaleY(-1);
+}
+
+.invitacion-asistencia::before {
+  transform: scaleX(-1);
+}
+
+.invitacion-asistencia::after {
   transform: rotate(180deg);
 }
 
-.triptico-centro > *,
 .invitacion-panel > * {
   position: relative;
   z-index: 1;
