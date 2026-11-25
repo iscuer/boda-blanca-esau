@@ -1,4 +1,5 @@
 import { appendConfirmations, type Confirmation } from "@/lib/confirmations-sheets";
+import { MAX_EDAD_NINO, MAX_NINOS } from "@/lib/ninos-rsvp";
 
 export const runtime = "nodejs";
 
@@ -18,6 +19,21 @@ export async function POST(request: Request) {
       return Response.json({ error: "Falta el nombre." }, { status: 400 });
     }
 
+    let infoNinos = "";
+    if (asiste && body.llevaNinos === true) {
+      const { cantidadNinos, edadesNinos } = body;
+      if (!Number.isInteger(cantidadNinos) || cantidadNinos < 1 || cantidadNinos > MAX_NINOS ||
+          !Array.isArray(edadesNinos) || edadesNinos.length !== cantidadNinos ||
+          edadesNinos.some((edad) => !Number.isInteger(edad) || edad < 0 || edad > MAX_EDAD_NINO)) {
+        return Response.json({ error: "Indica la edad de cada niño." }, { status: 400 });
+      }
+      infoNinos = `Niños: ${cantidadNinos}. Edades (años): ${edadesNinos.join(", ")}.`;
+    } else if (asiste && body.llevaNinos === false) {
+      infoNinos = "Niños: no.";
+    }
+    const observaciones = [infoNinos, clean(body.observaciones, 1000 - infoNinos.length - (infoNinos ? 1 : 0))]
+      .filter(Boolean).join("\n") || null;
+
     const grupoId = crypto.randomUUID();
     const filas: Confirmation[] = [
       {
@@ -27,7 +43,7 @@ export async function POST(request: Request) {
         asiste,
         alergias: asiste ? clean(body.alergias, 500) || null : null,
         necesita_bus: asiste && body.necesitaBus === true,
-        observaciones: clean(body.observaciones, 1000) || null,
+        observaciones,
       },
     ];
 

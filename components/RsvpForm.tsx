@@ -1,10 +1,13 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { MAX_EDAD_NINO, MAX_NINOS } from "@/lib/ninos-rsvp";
 
 export default function RsvpForm() {
   const [asiste, setAsiste] = useState("si");
   const [tieneAcompanante, setTieneAcompanante] = useState(false);
+  const [llevaNinos, setLlevaNinos] = useState(false);
+  const [cantidadNinos, setCantidadNinos] = useState(1);
 
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
@@ -20,7 +23,6 @@ export default function RsvpForm() {
 
     const nombre = form.get("nombre")?.toString().trim();
     const alergias = form.get("alergias")?.toString().trim() || null;
-    const bus = form.get("bus") === "si";
     const observaciones =
       form.get("observaciones")?.toString().trim() || null;
 
@@ -55,13 +57,14 @@ export default function RsvpForm() {
         nombre,
         asiste: asiste === "si",
         alergias,
-        necesitaBus: bus,
         observaciones,
         tieneAcompanante,
+        llevaNinos: asiste === "si" && llevaNinos,
+        cantidadNinos: asiste === "si" && llevaNinos ? cantidadNinos : 0,
+        edadesNinos: form.getAll("edadNino").map(Number),
         acompananteNombre,
         acompananteAlergias:
           form.get("acompananteAlergias")?.toString().trim() || null,
-        acompananteNecesitaBus: form.get("acompananteBus") === "si",
       }),
     }).catch(() => null);
 
@@ -140,6 +143,7 @@ export default function RsvpForm() {
               onChange={() => {
                 setAsiste("no");
                 setTieneAcompanante(false);
+                setLlevaNinos(false);
               }}
             />
 
@@ -164,19 +168,38 @@ export default function RsvpForm() {
             />
           </div>
 
-          <div>
-            <label className="mb-3 block text-sm">
-              ¿Necesitas autobús?
-            </label>
-
-            <select
-              name="bus"
-              className="w-full border-b border-neutral-400 bg-transparent py-3 outline-none"
-            >
-              <option value="no">No</option>
-              <option value="si">Sí</option>
-            </select>
-          </div>
+          <fieldset>
+            <legend className="mb-3 text-sm">¿Vendréis con niños?</legend>
+            <div className="flex gap-8">
+              <label className="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="llevaNinos" value="no" checked={!llevaNinos} onChange={() => setLlevaNinos(false)} />
+                No
+              </label>
+              <label className="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="llevaNinos" value="si" checked={llevaNinos} onChange={() => setLlevaNinos(true)} />
+                Sí
+              </label>
+            </div>
+            {llevaNinos && (
+              <div className="mt-4 grid gap-4">
+                <label className="grid gap-2 text-sm">
+                  ¿Cuántos niños vendrán?
+                  <select name="cantidadNinos" value={cantidadNinos} onChange={(event) => setCantidadNinos(Number(event.target.value))} className="w-full border-b border-neutral-400 bg-transparent py-2">
+                    {Array.from({ length: MAX_NINOS }, (_, index) => (
+                      <option key={index + 1} value={index + 1}>{index + 1}</option>
+                    ))}
+                  </select>
+                </label>
+                <p className="text-sm">Indica la edad que tendrán el día de la boda. Para bebés menores de un año, escribe 0.</p>
+                {Array.from({ length: cantidadNinos }, (_, index) => (
+                  <label key={index} className="grid gap-2 text-sm">
+                    Edad del niño {index + 1}
+                    <input name="edadNino" type="number" min={0} max={MAX_EDAD_NINO} step={1} required className="w-full border-b border-neutral-400 bg-transparent px-1 py-2" />
+                  </label>
+                ))}
+              </div>
+            )}
+          </fieldset>
 
           <div>
             <label className="mb-3 block text-sm">
@@ -244,20 +267,6 @@ export default function RsvpForm() {
                     placeholder="Indícanos cuál, si procede."
                     className="w-full border-b border-neutral-400 bg-transparent px-1 py-3 outline-none focus:border-black"
                   />
-                </div>
-
-                <div>
-                  <label className="mb-3 block text-sm">
-                    ¿Necesita autobús?
-                  </label>
-
-                  <select
-                    name="acompananteBus"
-                    className="w-full border-b border-neutral-400 bg-transparent py-3 outline-none"
-                  >
-                    <option value="no">No</option>
-                    <option value="si">Sí</option>
-                  </select>
                 </div>
 
               </div>
