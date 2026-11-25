@@ -43,14 +43,14 @@ export default function Triptico({
   }, [activo]);
 
   return (
-    <div className="invitacion">
-      <header className="invitacion-portada" hidden={activo !== null}>
+    <div className="invitacion" data-abierta={activo !== null}>
+      <header className="invitacion-portada" inert={activo !== null}>
         {portada}
-        <a ref={abrir} className="invitacion-boton triptico-abrir" href="#enlace">
+        <a ref={abrir} className="invitacion-boton triptico-abrir" href="#enlace" aria-controls="triptico-interior" aria-expanded={activo !== null}>
           Abrir invitación
         </a>
       </header>
-      <div className="triptico-abierto" hidden={activo === null}>
+      <div id="triptico-interior" className="triptico-abierto" inert={activo === null}>
         <div className="triptico-barra">
           <h1>Esaú <span>y</span> Blanca</h1>
           <a href="#inicio">Cerrar invitación</a>
