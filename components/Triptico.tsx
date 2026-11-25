@@ -56,9 +56,14 @@ export default function Triptico({
           <a href="#inicio">Cerrar invitación</a>
         </div>
         <nav className="invitacion-indice" aria-label="Apartados de la invitación">
-          {apartados.map(({ id, nombre }) => (
-            <a key={id} href={`#${id}`} aria-current={activo === id ? "location" : undefined}>
-              {nombre}
+          {apartados.map(({ id, nombre }, indice) => (
+            <a className="invitacion-tarjeta" key={id} href={`#${id}`} aria-current={activo === id ? "location" : undefined}>
+              <span
+                aria-hidden="true"
+                className="invitacion-tarjeta-foto"
+                style={{ backgroundPosition: `${(indice % 3) * 50}% ${indice < 3 ? 0 : 100}%` }}
+              />
+              <span className="invitacion-tarjeta-titulo">{nombre}</span>
             </a>
           ))}
         </nav>
