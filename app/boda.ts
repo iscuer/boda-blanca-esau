@@ -9,12 +9,12 @@ export const fechaBoda = {
 
 export const boda = {
   fotosMenu: {
-    enlace: "",
-    mensajes: "",
-    fotos: "",
-    hoteles: "",
-    regalo: "",
-    confirmacion: "",
+    enlace: { src: "/invitacion/menu/enlace.webp", encuadre: "50% 25%" },
+    mensajes: { src: "/invitacion/menu/mensajes.webp", encuadre: "50% 58%" },
+    fotos: { src: "/invitacion/menu/fotos.webp", encuadre: "50% 45%" },
+    hoteles: { src: "/invitacion/menu/hoteles.webp", encuadre: "50% 55%" },
+    regalo: { src: "/invitacion/menu/regalo.webp", encuadre: "50% 58%" },
+    confirmacion: { src: "/invitacion/menu/confirmacion.webp", encuadre: "50% 54%" },
   },
   hoteles: [] as Hotel[],
   regalo: { texto: "", enlace: "" },

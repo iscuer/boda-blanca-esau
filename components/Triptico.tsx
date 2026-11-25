@@ -67,11 +67,15 @@ export default function Triptico({
               <nav className="invitacion-indice" aria-label="Apartados de la invitación">
                 {apartados.map(({ id, nombre }) => (
                   <a className="invitacion-tarjeta" key={id} href={`#${id}`}>
-                    {boda.fotosMenu[id] && (
-                      <span className="invitacion-tarjeta-foto" aria-hidden="true">
-                        <Image src={boda.fotosMenu[id]} alt="" fill sizes="(max-width: 48rem) 26vw, 9rem" />
-                      </span>
-                    )}
+                    <span className="invitacion-tarjeta-foto" aria-hidden="true">
+                      <Image
+                        src={boda.fotosMenu[id].src}
+                        alt=""
+                        fill
+                        sizes="(max-width: 48rem) 26vw, 9rem"
+                        style={{ objectPosition: boda.fotosMenu[id].encuadre }}
+                      />
+                    </span>
                     <span className="invitacion-tarjeta-titulo">{nombre}</span>
                   </a>
                 ))}
